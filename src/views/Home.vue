@@ -3,7 +3,7 @@
     <v-text-field
       v-model="search"
       append-icon="mdi-magnify"
-      label="Search"
+      label="搜索"
       single-line
       hide-details
     ></v-text-field>
