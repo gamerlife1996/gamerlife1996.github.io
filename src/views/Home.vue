@@ -23,21 +23,25 @@
 <script>
 import json from './data.json'
 var tabledata = []
-for (var i = 0; i < json.shops.length; i++)
+for (var i_map = 0; i_map < json.maps.length; i_map++)
 {
-  var shop = json.shops[i];
-  for (var j = 0; j < shop.goods.length; j++)
+  var map = json.maps[i_map];
+  for (var i = 0; i < map.shops.length; i++)
   {
-    var good = shop.goods[j];
-    tabledata.push({
-      image: "1-1/"+good.index+".jpg",
-      name: good.name,
-      price: good.price,
-      shop: shop.title,
-      map: "1-1",
-      avail: good.available,
-      time: json.time,
-    });
+    var shop = map.shops[i];
+    for (var j = 0; j < shop.goods.length; j++)
+    {
+      var good = shop.goods[j];
+      tabledata.push({
+        image: map.map+"/"+good.index+".jpg",
+        name: good.name,
+        price: good.price,
+        shop: shop.title,
+        map: map.map,
+        avail: good.available,
+        time: json.time,
+      });
+    }
   }
 }
   export default {
