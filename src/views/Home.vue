@@ -39,7 +39,7 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
         shop: shop.title,
         map: map.map,
         avail: good.available,
-        time: json.time,
+        time: map.time,
       });
     }
   }
