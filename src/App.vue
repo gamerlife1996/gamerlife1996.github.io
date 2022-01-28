@@ -39,6 +39,15 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>商店搜索器</v-toolbar-title>
+      <template v-slot:extension>
+              <v-text-field
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="搜索"
+                single-line
+                hide-details
+              ></v-text-field>
+      </template>
     </v-app-bar>
 
     <v-main>
@@ -49,10 +58,8 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
-
   data: () => ({
     drawer: null,
     items: [
@@ -60,5 +67,15 @@ export default {
       { title: '关于', icon: 'mdi-help-box', to: '/about' },
     ],
   }),
+  computed: {
+    search: {
+      get () {
+        return this.$store.state.search
+      },
+      set (value) {
+        this.$store.commit('updateSearch', value)
+      }
+    }
+  }
 };
 </script>

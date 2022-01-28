@@ -1,22 +1,26 @@
 <template>
   <div class="home pa-6">
-    <v-text-field
-      v-model="search"
-      append-icon="mdi-magnify"
-      label="搜索"
-      single-line
-      hide-details
-    ></v-text-field>
     <v-data-table
       :headers="headers"
       :items="desserts"
-      :search="search"
+      :search="$store.state.search"
       :items-per-page=-1
+      @click:row="handleClick"
     >
       <template v-slot:item.image="{item}">
         <v-img :src="item.image" width="198px" height="40px" />
       </template>
+
     </v-data-table>
+      
+    <v-overlay
+      :value="overlay"
+    >
+      <v-img :src="currentDetail"/>
+      <v-btn color="success" @click="overlay = false" >
+        关闭
+      </v-btn>
+    </v-overlay>
   </div>
 </template>
 
@@ -40,6 +44,7 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
         map: map.map,
         avail: good.available,
         time: map.time,
+        detail: map.map+"/"+good.index+"_detail.jpg",
       });
     }
   }
@@ -47,8 +52,9 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
   export default {
     data() {
       return {
+        overlay: false,
+        currentDetail: '',
         name: 'Home',
-        search: '',
         headers: [
           { text: '截图', value: 'image' },
           { text: '名字', value: 'name' },
@@ -60,6 +66,13 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
         ],
         desserts: tabledata,
       }
+    },
+    methods: {
+      handleClick(value) {
+        console.log(value.detail)
+        this.currentDetail = value.detail
+        this.overlay = !this.overlay
+      },
     }
   }
 </script>
