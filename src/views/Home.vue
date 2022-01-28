@@ -1,7 +1,10 @@
 <template>
-  <div class="home pa-6">
+  <div class="home pa-2">
 
-    <v-app-bar app>
+    <v-app-bar
+      app
+      elevation="1"
+      >
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
@@ -12,11 +15,10 @@
     </v-app-bar>
 
     <v-data-table
-      dense
       :headers="headers"
       :items="desserts"
-      :search="$store.state.search"
-      :items-per-page=17
+      :search="search"
+      :items-per-page=15
       @click:row="onClickRow"
     >
       <template v-slot:item.image="{item}">
@@ -84,6 +86,16 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
       onClickOutside () {
         this.overlay = false
       },
+    },
+    computed: {
+      search: {
+        get () {
+          return this.$store.state.search
+        },
+        set (value) {
+          this.$store.commit('updateSearch', value)
+        }
+      }
     }
   }
 </script>
