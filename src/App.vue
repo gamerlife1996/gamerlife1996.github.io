@@ -35,21 +35,6 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>商店搜索器</v-toolbar-title>
-      <template v-slot:extension>
-              <v-text-field
-                v-model="search"
-                append-icon="mdi-magnify"
-                label="搜索"
-                single-line
-                hide-details
-              ></v-text-field>
-      </template>
-    </v-app-bar>
-
     <v-main>
       <!--  -->
       <router-view></router-view>
@@ -61,7 +46,7 @@
 export default {
   name: 'App',
   data: () => ({
-    drawer: null,
+    drawer: true,
     items: [
       { title: '商品列表', icon: 'mdi-view-dashboard', to: '/' },
       { title: '关于', icon: 'mdi-help-box', to: '/about' },

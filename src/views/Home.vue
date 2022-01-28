@@ -1,11 +1,23 @@
 <template>
   <div class="home pa-6">
+
+    <v-app-bar app>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="搜索"
+          single-line
+          hide-details
+        ></v-text-field>
+    </v-app-bar>
+
     <v-data-table
+      dense
       :headers="headers"
       :items="desserts"
       :search="$store.state.search"
-      :items-per-page=-1
-      @click:row="handleClick"
+      :items-per-page=17
+      @click:row="onClickRow"
     >
       <template v-slot:item.image="{item}">
         <v-img :src="item.image" width="198px" height="40px" />
@@ -16,10 +28,7 @@
     <v-overlay
       :value="overlay"
     >
-      <v-img :src="currentDetail"/>
-      <v-btn color="success" @click="overlay = false" >
-        关闭
-      </v-btn>
+      <v-img :src="currentDetail" v-click-outside="onClickOutside" />
     </v-overlay>
   </div>
 </template>
@@ -68,10 +77,12 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
       }
     },
     methods: {
-      handleClick(value) {
-        console.log(value.detail)
+      onClickRow(value) {
         this.currentDetail = value.detail
-        this.overlay = !this.overlay
+        this.overlay = true
+      },
+      onClickOutside () {
+        this.overlay = false
       },
     }
   }
