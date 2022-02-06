@@ -52,15 +52,5 @@ export default {
       { title: '关于', icon: 'mdi-help-box', to: '/about' },
     ],
   }),
-  computed: {
-    search: {
-      get () {
-        return this.$store.state.search
-      },
-      set (value) {
-        this.$store.commit('updateSearch', value)
-      }
-    }
-  }
 };
 </script>

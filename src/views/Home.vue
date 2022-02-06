@@ -1,17 +1,29 @@
 <template>
   <div class="home pa-2">
-
     <v-app-bar
       app
       elevation="1"
       >
+    <v-row no-gutters class="pt-6">
+      <v-col cols="4" >
         <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="搜索"
-          single-line
-          hide-details
+          v-model="input"
+          label="商品名称"
+          @keydown.enter.prevent="onClickSearch"
         ></v-text-field>
+      </v-col>
+      <v-col cols="1" >
+        <v-btn
+          color="primary"
+          width="100px"
+          height="30px"
+          class="ml-4"
+          @click="onClickSearch"
+        >
+          搜索
+        </v-btn>
+      </v-col>
+    </v-row>
     </v-app-bar>
 
     <v-data-table
@@ -19,6 +31,8 @@
       :items="desserts"
       :search="search"
       :items-per-page=-1
+      :sort-by.sync="sortBy"
+      :sort-desc.sync="sortDesc"
       @click:row="onClickRow"
     >
       <template v-slot:item.image="{item}">
@@ -61,8 +75,13 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
   }
 }
   export default {
+    props: [
+      'search',
+    ],
     data() {
       return {
+        sortBy: 'name',
+        sortDesc: false,
         overlay: false,
         currentDetail: '',
         name: 'Home',
@@ -86,16 +105,13 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
       onClickOutside () {
         this.overlay = false
       },
-    },
-    computed: {
-      search: {
-        get () {
-          return this.$store.state.search
-        },
-        set (value) {
-          this.$store.commit('updateSearch', value)
+      onClickSearch () {
+        if (this.input) {
+          this.$router.push('/result/'+this.input)
+        } else {
+          this.$router.push('/')
         }
-      }
-    }
+      },
+    },
   }
 </script>
