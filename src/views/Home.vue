@@ -18,7 +18,7 @@
       :headers="headers"
       :items="desserts"
       :search="search"
-      :items-per-page=15
+      :items-per-page=-1
       @click:row="onClickRow"
     >
       <template v-slot:item.image="{item}">
