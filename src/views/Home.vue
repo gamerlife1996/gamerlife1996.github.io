@@ -5,6 +5,7 @@
       elevation="1"
       >
     <v-row no-gutters class="pt-6">
+
       <v-col cols="4" >
         <v-text-field
           v-model="input"
@@ -12,6 +13,7 @@
           @keydown.enter.prevent="onClickSearch"
         ></v-text-field>
       </v-col>
+
       <v-col cols="1" >
         <v-btn
           color="primary"
@@ -23,9 +25,26 @@
           搜索
         </v-btn>
       </v-col>
+
+      
+      <!-- <v-col cols="1" class="pl-8" >
+        <v-checkbox
+          v-model="show_avail"
+          :label="`显示有货`"
+        ></v-checkbox>
+      </v-col>
+
+      <v-col cols="1" >
+        <v-checkbox
+          v-model="show_not_avail"
+          :label="`显示无货`"
+        ></v-checkbox>
+      </v-col> -->
+
       <v-col cols="3" offset="4" class="blue--text text-right pt-1 pr-2">
         更新时间： {{ this.starttime }}
       </v-col>
+
     </v-row>
     </v-app-bar>
 
@@ -37,31 +56,20 @@
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
     >
-      <template v-slot:item.image="{item}">
-        <v-img :src="item.image" width="198px" height="40px" />
-      </template>
-      <template v-slot:item.detail="{ item }">
-        <v-btn
-          small
-          color="primary"
-          class="mr-2"
-          @click="onClickRow(item, $event)"
-        >
-        详情
-        </v-btn>
+    
+      <template v-slot:item.image="{ item }">
+        <v-tooltip right transition="none">
+          <template v-slot:activator="{ on }">
+            <v-img :src="item.image" width="198px" height="40px" v-on="on"></v-img>
+          </template>
+          <v-img
+            :src="item.detail"
+            >
+          </v-img>
+         </v-tooltip>
       </template>
 
     </v-data-table>
-
-    <v-overlay
-      :value="overlay"
-    >
-      <v-img
-        :src="currentDetail"
-        position="left 0px top 0 px"
-        v-click-outside="onClickOutside">
-      </v-img>
-    </v-overlay>
   </div>
 </template>
 
@@ -100,32 +108,24 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
     ],
     data() {
       return {
+        show_avail: true,
+        show_not_avail: true,
         input: '',
         starttime: starttime,
         sortBy: 'name',
         sortDesc: false,
-        overlay: false,
-        currentDetail: '',
         name: 'Home',
         headers: [
-          { text: '截图', value: 'image', width: '300px' },
-          { text: '', value: 'detail', width: '150px' },
+          { text: '截图', value: 'image', filterable: false, width: '300px' },
           { text: '名字', value: 'name', width: '300px' },
-          // { text: '价格', value: 'price', width: '300px' },
-          { text: '位置', value: 'map', width: '150px' },
-          { text: '商店', value: 'shop' },
+          { text: '价格', value: 'price', filterable: false, width: '300px' },
+          { text: '位置', value: 'map', filterable: false, width: '150px' },
+          { text: '商店', value: 'shop', filterable: false },
         ],
         desserts: tabledata,
       }
     },
     methods: {
-      onClickRow(value) {
-        this.currentDetail = value.detail
-        this.overlay = true
-      },
-      onClickOutside () {
-        this.overlay = false
-      },
       onClickSearch () {
         if (this.input) {
           this.$router.push('/result/'+this.input)
