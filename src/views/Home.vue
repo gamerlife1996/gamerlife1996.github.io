@@ -23,6 +23,9 @@
           搜索
         </v-btn>
       </v-col>
+      <v-col cols="3" offset="4" class="blue--text text-right pt-1 pr-2">
+        更新时间： {{ this.starttime }}
+      </v-col>
     </v-row>
     </v-app-bar>
 
@@ -33,18 +36,31 @@
       :items-per-page=-1
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
-      @click:row="onClickRow"
     >
       <template v-slot:item.image="{item}">
         <v-img :src="item.image" width="198px" height="40px" />
       </template>
+      <template v-slot:item.detail="{ item }">
+        <v-btn
+          small
+          color="primary"
+          class="mr-2"
+          @click="onClickRow(item, $event)"
+        >
+        详情
+        </v-btn>
+      </template>
 
     </v-data-table>
-      
+
     <v-overlay
       :value="overlay"
     >
-      <v-img :src="currentDetail" v-click-outside="onClickOutside" />
+      <v-img
+        :src="currentDetail"
+        position="left 0px top 0 px"
+        v-click-outside="onClickOutside">
+      </v-img>
     </v-overlay>
   </div>
 </template>
@@ -52,9 +68,13 @@
 <script>
 import json from './data.json'
 var tabledata = []
+var starttime = ''
 for (var i_map = 0; i_map < json.maps.length; i_map++)
 {
   var map = json.maps[i_map];
+  if (map.map == "1-1") {
+    starttime = map.time
+  }
   for (var i = 0; i < map.shops.length; i++)
   {
     var shop = map.shops[i];
@@ -80,19 +100,20 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
     ],
     data() {
       return {
+        input: '',
+        starttime: starttime,
         sortBy: 'name',
         sortDesc: false,
         overlay: false,
         currentDetail: '',
         name: 'Home',
         headers: [
-          { text: '截图', value: 'image' },
-          { text: '名字', value: 'name' },
-          { text: '价格', value: 'price' },
+          { text: '截图', value: 'image', width: '300px' },
+          { text: '', value: 'detail', width: '150px' },
+          { text: '名字', value: 'name', width: '300px' },
+          // { text: '价格', value: 'price', width: '300px' },
+          { text: '位置', value: 'map', width: '150px' },
           { text: '商店', value: 'shop' },
-          { text: '位置', value: 'map' },
-          { text: '有货', value: 'avail' },
-          { text: '时间', value: 'time' },
         ],
         desserts: tabledata,
       }
