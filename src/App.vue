@@ -48,7 +48,8 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { title: '商品列表', icon: 'mdi-view-dashboard', to: '/' },
+      { title: '商品列表', icon: 'mdi-store', to: '/' },
+      { title: '解谜', icon: 'mdi-numeric', to: '/puzzle' },
       { title: '关于', icon: 'mdi-help-box', to: '/about' },
     ],
   }),
