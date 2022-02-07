@@ -42,7 +42,7 @@
       </v-col> -->
 
       <v-col cols="3" offset="4" class="blue--text text-right pt-1 pr-2">
-        更新时间： {{ this.starttime }}
+        更新时间： {{ this.time_passed }} 前
       </v-col>
 
     </v-row>
@@ -62,10 +62,7 @@
           <template v-slot:activator="{ on }">
             <v-img :src="item.image" width="198px" height="40px" v-on="on"></v-img>
           </template>
-          <v-img
-            :src="item.detail"
-            >
-          </v-img>
+          <v-img :src="item.detail" ></v-img>
          </v-tooltip>
       </template>
 
@@ -75,14 +72,28 @@
 
 <script>
 import json from './data.json'
+
+var pass_seconds = Math.trunc(Date.now() / 1000 - json.starttime)
+const pass_days = Math.trunc(pass_seconds / 86400)
+pass_seconds -= pass_days * 86400
+const pass_hours = Math.trunc(pass_seconds / 3600)
+pass_seconds -= pass_hours * 3600
+const pass_mins =  Math.trunc(pass_seconds / 60)
+var time_passed = ''
+if (pass_days > 0) {
+  time_passed += pass_days + "天"
+}
+if (pass_hours > 0) {
+  time_passed += pass_hours + "小时"
+}
+if (pass_mins > 0) {
+  time_passed += pass_mins + "分钟"
+}
+
 var tabledata = []
-var starttime = ''
 for (var i_map = 0; i_map < json.maps.length; i_map++)
 {
   var map = json.maps[i_map];
-  if (map.map == "1-1") {
-    starttime = map.time
-  }
   for (var i = 0; i < map.shops.length; i++)
   {
     var shop = map.shops[i];
@@ -111,7 +122,7 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
         show_avail: true,
         show_not_avail: true,
         input: '',
-        starttime: starttime,
+        time_passed: time_passed,
         sortBy: 'name',
         sortDesc: false,
         name: 'Home',
