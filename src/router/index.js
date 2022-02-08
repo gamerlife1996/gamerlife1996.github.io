@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Puzzle from '../views/Puzzle.vue'
+import PuzzleSolver from '../views/PuzzleSolver.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/puzzle',
     name: 'Puzzle',
     component: Puzzle
+  },
+  {
+    path: '/solve',
+    name: 'PuzzleSolver',
+    component: PuzzleSolver
   },
 ]
 
