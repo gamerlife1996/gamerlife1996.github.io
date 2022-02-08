@@ -70,14 +70,13 @@ while (third == first || third == second) {
 const answer = first + second + third
 // console.log(answer)
 
-var records = []
 export default {
     name: 'App',
     data: () => ({
         input: '',
         status: 0,
         answer: answer,
-        records: records,
+        records: [],
     }),
     methods: {
         onClickOk () {
@@ -102,12 +101,12 @@ export default {
                 }
 
             }
-            records.push('第'+ (records.length+1) +'次破译：[' + this.input + '] ' + correct_num + '个数字正确，' + correct_pos + '个位置正确\n')
+            this.records.push('第'+ (this.records.length+1) +'次破译：[' + this.input + '] ' + correct_num + '个数字正确，' + correct_pos + '个位置正确\n')
             if (this.input == answer) {
                 alert("破译成功！")
                 this.status = 1
             }
-            else if (records.length >= 7) {
+            else if (this.records.length >= 7) {
                 this.status = 2
             }
             this.input = ''

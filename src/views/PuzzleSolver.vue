@@ -88,7 +88,6 @@ function validationCheck(all_input, all_correct_num, all_correct_pos, answer) {
     return true
 }
 
-var records = []
 export default {
     name: 'App',
     data: () => ({
@@ -99,7 +98,7 @@ export default {
         all_correct_num: [],
         all_correct_pos: [],
         allComibinatioons: [],
-        records: records,
+        records: [],
     }),
     methods: {
         onClickOk () {
@@ -132,7 +131,7 @@ export default {
                 }
             }
 
-            records.push('第'+ (records.length+1) +'次破译：[' + this.input + '] ' + this.correct_num + '个数字正确，' + this.correct_pos + '个位置正确\n')
+            this.records.push('第'+ (this.records.length+1) +'次破译：[' + this.input + '] ' + this.correct_num + '个数字正确，' + this.correct_pos + '个位置正确\n')
             this.input = ''
             this.correct_num = ''
             this.correct_pos = ''

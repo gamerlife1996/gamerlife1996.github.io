@@ -42,7 +42,7 @@
       </v-col> -->
 
       <v-col cols="3" offset="4" class="blue--text text-right pt-1 pr-2">
-        更新时间： {{ this.time_passed }} 前
+        更新时间： {{ this.time_passed }}前
       </v-col>
 
     </v-row>
