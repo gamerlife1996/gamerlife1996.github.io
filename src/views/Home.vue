@@ -60,12 +60,9 @@
       :headers="headers"
       :items="goods"
       :search="query"
-      items-per-page="50"
+      items-per-page="-1"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
-      :page.sync="page"
-      hide-default-footer
-      @page-count="pageCount = $event"
     >
     
       <template v-slot:item.image="{ item }">
@@ -78,14 +75,6 @@
       </template>
 
     </v-data-table>
-    
-    <div class="pt-2">
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-        total-visible="10"
-      ></v-pagination>
-    </div>
   </div>
 </template>
 
@@ -157,7 +146,7 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
           { text: '截图', value: 'image', filterable: false, width: '300px' },
           { text: '名字', value: 'name', width: '300px' },
           { text: '价格', value: 'price', filterable: false, width: '300px' },
-          { text: '有货', value: 'avail', width: '150px',
+          { text: '有货', value: 'avail', width: '150px', align: ' d-none',
             filter: value => {
               if (value) {
                 return this.show_avail
