@@ -13,10 +13,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/result/:search',
+    path: '/search',
     name: 'Home',
-    props: true,
-    component: Home
+    component: Home,
+    props: route => ({ query: route.query.q })
   },
   {
     path: '/about',

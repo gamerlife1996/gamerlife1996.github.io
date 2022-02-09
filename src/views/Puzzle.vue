@@ -5,7 +5,7 @@
         <div v-if="status==0">
             密码为3位数。每位的取值范围为1~9<br/>
             猜测后我会告诉你有几个数字正确，几个位置正确<br/>
-            数字正确-数字对了位置不对！<br/>
+            数字正确-数字对了，位置不对！<br/>
             位置正确-数字对了，位置也对了！<br/>
             破译记录：<br/>
             <div v-for="record in records"> {{ record }} </div>
@@ -18,8 +18,11 @@
 
                 <v-col cols="2" >
                     <v-text-field
+                    class="pr-2"
                     v-model="input"
                     label=""
+                    outlined
+                    dense
                     @keydown.enter.prevent="onClickOk"
                     ></v-text-field>
                 </v-col>

@@ -1,10 +1,11 @@
 <template>
   <div class="about pa-6">
-    <h1>解谜器</h1>
-    破译记录：<br/>
+    <h1>解密工具</h1>
+    <div>破译记录：</div>
     <div v-for="record in records"> {{ record }} </div>
-    <br/>
+
     <div v-if="all_input.length > 0">
+    <br/>
     共有可能组合 {{ allComibinatioons.length }} 个：<br/>
     <span v-for="comb in allComibinatioons"> {{ comb }}, </span>
     </div>
@@ -13,26 +14,32 @@
 
     <v-row no-gutters>
 
-        <v-col cols="1" class="pr-6" >
+        <v-col cols="1" class="pr-4" >
             <v-text-field
             v-model="input"
             label="猜测组合"
+            outlined
+            dense
             @keydown.enter.prevent="onClickOk"
             ></v-text-field>
         </v-col>
 
-        <v-col cols="1" class="pr-6" >
+        <v-col cols="1" class="pr-4" >
             <v-text-field
             v-model="correct_num"
             label="正确数字个数"
+            outlined
+            dense
             @keydown.enter.prevent="onClickOk"
             ></v-text-field>
         </v-col>
 
-        <v-col cols="1" class="pr-6" >
+        <v-col cols="1" class="pr-4" >
             <v-text-field
             v-model="correct_pos"
             label="正确位置个数"
+            outlined
+            dense
             @keydown.enter.prevent="onClickOk"
             ></v-text-field>
         </v-col>

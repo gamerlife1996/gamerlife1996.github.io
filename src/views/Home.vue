@@ -27,22 +27,30 @@
       </v-col>
 
       
-      <!-- <v-col cols="1" class="pl-8" >
+      <v-col cols="1" class="pt-1" >
         <v-checkbox
           v-model="show_avail"
-          :label="`显示有货`"
+          label="显示有货"
         ></v-checkbox>
       </v-col>
 
-      <v-col cols="1" >
+      <v-col cols="1" class="pt-1" >
         <v-checkbox
           v-model="show_not_avail"
-          :label="`显示无货`"
+          label="显示无货"
         ></v-checkbox>
-      </v-col> -->
+      </v-col>
 
-      <v-col cols="3" offset="4" class="blue--text text-right pt-1 pr-2">
-        更新时间： {{ this.time_passed }}前
+      <v-col cols="2" offset="3">
+        <v-chip
+          :color="color"
+          text-color="white"
+        >
+          <v-icon left>
+            mdi-clock-outline
+          </v-icon>
+          更新时间：{{ this.time_passed }}前
+        </v-chip>
       </v-col>
 
     </v-row>
@@ -50,15 +58,18 @@
 
     <v-data-table
       :headers="headers"
-      :items="desserts"
-      :search="search"
-      :items-per-page=-1
+      :items="goods"
+      :search="query"
+      items-per-page="50"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
+      :page.sync="page"
+      hide-default-footer
+      @page-count="pageCount = $event"
     >
     
       <template v-slot:item.image="{ item }">
-        <v-tooltip right transition="none">
+        <v-tooltip right transition="none" >
           <template v-slot:activator="{ on }">
             <v-img :src="item.image" width="198px" height="40px" v-on="on"></v-img>
           </template>
@@ -67,6 +78,14 @@
       </template>
 
     </v-data-table>
+    
+    <div class="pt-2">
+      <v-pagination
+        v-model="page"
+        :length="pageCount"
+        total-visible="10"
+      ></v-pagination>
+    </div>
   </div>
 </template>
 
@@ -88,6 +107,13 @@ if (pass_hours > 0) {
 }
 if (pass_mins > 0) {
   time_passed += pass_mins + "分钟"
+}
+
+var color = 'green'
+if (pass_days >= 2) {
+  color = 'red'
+} else if (pass_days >= 1) {
+  color = 'orange'
 }
 
 var tabledata = []
@@ -115,12 +141,13 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
 }
   export default {
     props: [
-      'search',
+      'query',
     ],
     data() {
       return {
         show_avail: true,
         show_not_avail: true,
+        color: color,
         input: '',
         time_passed: time_passed,
         sortBy: 'name',
@@ -130,18 +157,31 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
           { text: '截图', value: 'image', filterable: false, width: '300px' },
           { text: '名字', value: 'name', width: '300px' },
           { text: '价格', value: 'price', filterable: false, width: '300px' },
+          { text: '有货', value: 'avail', width: '150px',
+            filter: value => {
+              if (value) {
+                return this.show_avail
+              } else {
+                return this.show_not_avail
+              }
+            }
+           },
           { text: '位置', value: 'map', filterable: false, width: '150px' },
           { text: '商店', value: 'shop', filterable: false },
         ],
-        desserts: tabledata,
+        goods: tabledata,
+        page: 1,
+        pageCount: 0,
       }
     },
     methods: {
       onClickSearch () {
         if (this.input) {
-          this.$router.push('/result/'+this.input)
+          this.$router.push('/search?q='+this.input)
+          this.$router.go()
         } else {
           this.$router.push('/')
+          this.$router.go()
         }
       },
     },
