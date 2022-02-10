@@ -48,7 +48,8 @@ export default {
   data: () => ({
     drawer: true,
     items: [
-      { title: '自由市场', icon: 'mdi-store', to: '/' },
+      { title: '市场总览', icon: 'mdi-store', to: '/overview' },
+      { title: '市场搜索', icon: 'mdi-magnify', to: '/search' },
       { title: '解密游戏', icon: 'mdi-numeric', to: '/puzzle' },
       { title: '解密工具', icon: 'mdi-calculator', to: '/solve' },
       { title: '关于', icon: 'mdi-help-box', to: '/about' },
