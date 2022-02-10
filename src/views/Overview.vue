@@ -2,7 +2,7 @@
     <v-data-iterator
     :items="maps"
     item-key="name"
-    :items-per-page="-1"
+    :items-per-page=-1
     hide-default-footer
     >
         <template v-slot:default="{ items }">
@@ -27,10 +27,10 @@
                                     
                                     <v-tooltip right transition="none" >
                                         <template v-slot:activator="{ on }">
-                                            <v-img :src="`1-1/${good.index}.jpg`" width="198px" height="40px" v-on="on"></v-img>
+                                            <v-img :src="`${map.map}/${good.index}.jpg`" width="198px" height="40px" v-on="on"></v-img>
                                         </template>
                                         <div align="center">{{good.name}}</div>
-                                        <v-img :src="`1-1/${good.index}_detail.jpg`" ></v-img>
+                                        <v-img :src="`${map.map}/${good.index}_detail.jpg`" ></v-img>
                                     </v-tooltip>
                                 </v-list-item>
                             </v-list>
