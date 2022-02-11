@@ -10,7 +10,7 @@
                 v-for="map in items"
                 :key="map.map">
                 <v-card class="ma-4" color="#EEEEEE">
-                    <v-banner color="#222831" class="white--text" style="font-size:25px">{{map.map}}</v-banner>
+                    <v-banner color="#222831" class="white--text" style="font-size:22px">{{map.map[0]}} 线 {{map.map.substring(2)}} 洞</v-banner>
                     <div class="d-flex flex-wrap">
                         <v-card
                             class="ma-1"
@@ -27,10 +27,10 @@
                                     
                                     <v-tooltip right transition="none" >
                                         <template v-slot:activator="{ on }">
-                                            <v-img :src="`${map.map}/${good.index}.jpg`" width="198px" height="40px" v-on="on"></v-img>
+                                            <v-img :src="`${starttime}/${map.map}/${good.index}.jpg`" width="198px" height="40px" v-on="on"></v-img>
                                         </template>
                                         <div align="center">{{good.name}}</div>
-                                        <v-img :src="`${map.map}/${good.index}_detail.jpg`" ></v-img>
+                                        <v-img :src="`${starttime}/${map.map}/${good.index}_detail.jpg`" ></v-img>
                                     </v-tooltip>
                                 </v-list-item>
                             </v-list>
@@ -77,6 +77,7 @@ export default {
         input: '',
         time_passed: time_passed,
         maps: json.maps,
+        starttime: json.starttime,
     }),
 }
 </script>

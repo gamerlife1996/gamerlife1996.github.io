@@ -116,14 +116,14 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
     {
       var good = shop.goods[j];
       tabledata.push({
-        image: map.map+"/"+good.index+".jpg",
+        image: json.starttime+"/"+map.map+"/"+good.index+".jpg",
         name: good.name,
         price: good.price,
         shop: shop.title,
         map: map.map,
         avail: good.available,
         time: map.time,
-        detail: map.map+"/"+good.index+"_detail.jpg",
+        detail: json.starttime+"/"+map.map+"/"+good.index+"_detail.jpg",
       });
     }
   }
