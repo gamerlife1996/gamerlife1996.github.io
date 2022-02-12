@@ -17,7 +17,7 @@
                             outlined
                             width="230px"
                             v-for="shop in map.shops"
-                            :key="shop.title">
+                            :key="shop.index">
                             <v-banner color="#00ADB5" class="white--text">{{ shop.title }}</v-banner>
                             <v-divider></v-divider>
                             <v-list dense>

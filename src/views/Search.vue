@@ -55,7 +55,10 @@
     >
     
       <template v-slot:item.image="{ item }">
-        <v-tooltip right transition="none" >
+        <v-tooltip
+          right
+          transition="none"
+           >
           <template v-slot:activator="{ on }">
             <v-img
             :src="item.image"
@@ -65,7 +68,11 @@
             v-on="on"
             ></v-img>
           </template>
-          <v-img :src="item.detail" ></v-img>
+          <v-img :src="item.detail"
+            contain
+            width="310"
+            height="460"
+           ></v-img>
          </v-tooltip>
       </template>
 
@@ -99,6 +106,7 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
     }
   }
 }
+console.log("search init")
   export default {
     props: [
       'query',
@@ -136,15 +144,12 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
       onClickSearch () {
         if (this.input) {
           this.$router.push('/search?q='+this.input)
-          this.$router.go()
         } else {
           this.$router.push('/search')
-          this.$router.go()
         }
       },
       onClickImage(good) {
           this.$router.push('/search?q='+good.name)
-          this.$router.go()
       },
     },
   }
