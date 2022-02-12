@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Search from '../views/Search.vue'
-import Puzzle from '../views/Puzzle.vue'
-import Overview from '../views/Overview.vue'
-import PuzzleSolver from '../views/PuzzleSolver.vue'
+// import Overview from '../views/Overview.vue'
+// import Search from '../views/Search.vue'
+// import Puzzle from '../views/Puzzle.vue'
+// import PuzzleSolver from '../views/PuzzleSolver.vue'
 
 Vue.use(VueRouter)
 
@@ -11,12 +11,12 @@ const routes = [
   {
     path: '/overview',
     name: 'Overview',
-    component: Overview
+    component: resolve => require(['@/views/Overview'], resolve),
   },
   {
     path: '/search',
     name: 'Search',
-    component: Search,
+    component: resolve => require(['@/views/Search'], resolve),
     props: route => ({ query: route.query.q })
   },
   {
@@ -30,12 +30,12 @@ const routes = [
   {
     path: '/puzzle',
     name: 'Puzzle',
-    component: Puzzle
+    component: resolve => require(['@/views/Puzzle'], resolve),
   },
   {
     path: '/solve',
     name: 'PuzzleSolver',
-    component: PuzzleSolver
+    component: resolve => require(['@/views/PuzzleSolver'], resolve),
   },
 ]
 

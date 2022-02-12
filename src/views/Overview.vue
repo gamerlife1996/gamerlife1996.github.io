@@ -49,37 +49,8 @@
 <script>
 import json from './data.json'
 
-var pass_seconds = Math.trunc(Date.now() / 1000 - json.starttime)
-const pass_days = Math.trunc(pass_seconds / 86400)
-pass_seconds -= pass_days * 86400
-const pass_hours = Math.trunc(pass_seconds / 3600)
-pass_seconds -= pass_hours * 3600
-const pass_mins =  Math.trunc(pass_seconds / 60)
-var time_passed = ''
-if (pass_days > 0) {
-  time_passed += pass_days + "天"
-}
-if (pass_hours > 0) {
-  time_passed += pass_hours + "小时"
-}
-if (pass_mins > 0) {
-  time_passed += pass_mins + "分钟"
-}
-
-var color = 'green'
-if (pass_days >= 2) {
-  color = 'red'
-} else if (pass_days >= 1) {
-  color = 'orange'
-}
-
 export default {
     data: () => ({
-        show_avail: true,
-        show_not_avail: true,
-        color: color,
-        input: '',
-        time_passed: time_passed,
         maps: json.maps,
         starttime: json.starttime,
     }),

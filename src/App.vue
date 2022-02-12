@@ -42,8 +42,9 @@
     </v-navigation-drawer>
 
     <v-main>
-      <!--  -->
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </v-main>
   </v-app>
 </template>
