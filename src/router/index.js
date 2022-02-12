@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Search from '../views/Search.vue'
 import Puzzle from '../views/Puzzle.vue'
 import Overview from '../views/Overview.vue'
 import PuzzleSolver from '../views/PuzzleSolver.vue'
@@ -9,19 +9,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
     path: '/overview',
     name: 'Overview',
     component: Overview
   },
   {
     path: '/search',
-    name: 'Home',
-    component: Home,
+    name: 'Search',
+    component: Search,
     props: route => ({ query: route.query.q })
   },
   {

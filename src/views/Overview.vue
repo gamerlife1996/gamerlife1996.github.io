@@ -27,9 +27,13 @@
                                     
                                     <v-tooltip right transition="none" >
                                         <template v-slot:activator="{ on }">
-                                            <v-img :src="`${starttime}/${map.map}/${good.index}.jpg`" width="198px" height="40px" v-on="on"></v-img>
+                                            <v-img 
+                                                :src="`${starttime}/${map.map}/${good.index}.jpg`"
+                                                width="198px"
+                                                height="40px"
+                                                @click="onClickImage(good)"
+                                                v-on="on"></v-img>
                                         </template>
-                                        <div align="center">{{good.name}}</div>
                                         <v-img :src="`${starttime}/${map.map}/${good.index}_detail.jpg`" ></v-img>
                                     </v-tooltip>
                                 </v-list-item>
@@ -79,5 +83,10 @@ export default {
         maps: json.maps,
         starttime: json.starttime,
     }),
+    methods: {
+        onClickImage(good) {
+            this.$router.push('/search?q='+good.name)
+        },
+    }
 }
 </script>
