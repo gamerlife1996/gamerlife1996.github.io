@@ -49,9 +49,12 @@
       :headers="headers"
       :items="goods"
       :search="query"
-      :items-per-page=-1
+      :items-per-page=50
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
+      :page.sync="page"
+      hide-default-footer
+      @page-count="pageCount = $event"
     >
     
       <template v-slot:item.image="{ item }">
@@ -77,6 +80,14 @@
       </template>
 
     </v-data-table>
+
+    <v-pagination
+      v-model="page"
+      class="mt-2"
+      :length="pageCount"
+      :total-visible="10"
+    ></v-pagination>
+
   </div>
 </template>
 
@@ -106,13 +117,14 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
     }
   }
 }
-console.log("search init")
   export default {
     props: [
       'query',
     ],
     data() {
       return {
+        page: 1,
+        pageCount: 0,
         show_avail: true,
         show_not_avail: true,
         input: this.query,
