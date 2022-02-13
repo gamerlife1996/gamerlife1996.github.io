@@ -73,8 +73,8 @@
           </template>
           <v-img :src="item.detail"
             contain
-            width="310"
-            height="460"
+            :width="item.detail_width"
+            :height="item.detail_height"
            ></v-img>
          </v-tooltip>
       </template>
@@ -113,6 +113,8 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
         avail: good.available,
         time: map.time,
         detail: json.starttime+"/"+map.map+"/"+good.index+"_detail.jpg",
+        detail_width: good.detailWidth,
+        detail_height: good.detailHeight,
       });
     }
   }

@@ -86,7 +86,7 @@ export default {
       { title: '市场搜索', icon: 'mdi-magnify', to: '/search' },
       { title: '解密游戏', icon: 'mdi-numeric', to: '/puzzle' },
       { title: '解密工具', icon: 'mdi-calculator', to: '/solve' },
-      { title: '关于', icon: 'mdi-help-box', to: '/about' },
+      { title: '使用说明', icon: 'mdi-help-box', to: '/' },
     ],
   }),
 };
