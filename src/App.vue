@@ -3,6 +3,7 @@
     <v-navigation-drawer
       v-model="drawer"
       app
+      align="center"
       >
       <v-list-item>
         <v-list-item-content>
@@ -17,12 +18,16 @@
             </v-chip>
         </v-list-item-content>
       </v-list-item>
-
+      
+      QQ交流群：717339663<br/>
+      <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=nEUju_QXz9pGb_ufmfLUJCfEBPcTR4lR&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="可爱岛助手催更交流群" title="可爱岛助手催更交流群"></a>
+      
       <v-divider></v-divider>
 
       <v-list
         dense
         nav
+      align="left"
       >
         <v-list-item
           v-for="item in items"
