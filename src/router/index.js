@@ -37,6 +37,11 @@ const routes = [
     name: 'PuzzleSolver',
     component: resolve => require(['@/views/PuzzleSolver'], resolve),
   },
+  {
+    path: '/wanjuxiong',
+    name: 'PuzzleSolverExt',
+    component: resolve => require(['@/views/PuzzleSolverExt'], resolve),
+  },
 ]
 
 const router = new VueRouter({
