@@ -54,6 +54,7 @@
       :sort-desc.sync="sortDesc"
       :page.sync="page"
       hide-default-footer
+      multi-sort
       @page-count="pageCount = $event"
     >
     
@@ -77,6 +78,12 @@
             :height="item.detail_height"
            ></v-img>
          </v-tooltip>
+      </template>
+    
+      <template v-slot:item.priceInt="{ item }">
+        <div :style="item.color">
+        {{ item.price }}金币
+        </div>
       </template>
 
     </v-data-table>
@@ -104,10 +111,30 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
     for (var j = 0; j < shop.goods.length; j++)
     {
       var good = shop.goods[j];
+      var priceInt = parseInt(good.price.replaceAll(',',''));
+      var color = "color:#0077FF";
+      if (priceInt >= 100000)
+      {
+        color = "color:#00BBCC";
+      }
+      if (priceInt >= 1000000)
+      {
+        color = "color:#669900";
+      }
+      if (priceInt >= 10000000)
+      {
+        color = "color:#FF5500";
+      }
+      if (priceInt >= 100000000)
+      {
+        color = "color:#DD22CC";
+      }
       tabledata.push({
         image: json.starttime+"/"+map.map+"/"+good.index+".jpg",
         name: good.name,
-        // price: good.price,
+        price: good.price,
+        priceInt: priceInt,
+        color: color,
         shop: shop.title,
         map: map.map,
         avail: good.available,
@@ -130,13 +157,13 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
         show_avail: true,
         show_not_avail: true,
         input: this.query,
-        sortBy: 'name',
-        sortDesc: false,
+        sortBy: ['name','priceInt'],
+        sortDesc: [false, false],
         name: 'Home',
         headers: [
           { text: '截图', value: 'image', filterable: false, width: '300px' },
           { text: '名字', value: 'name', width: '300px' },
-          // { text: '价格', value: 'price', filterable: false, width: '300px' },
+          { text: '价格', value: 'priceInt', width: '300px' },
           { text: '有货', value: 'avail', width: '150px', align: ' d-none',
             filter: value => {
               if (value) {
