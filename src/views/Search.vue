@@ -161,9 +161,9 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
         sortDesc: [false, false],
         name: 'Home',
         headers: [
-          { text: '截图', value: 'image', filterable: false, width: '300px' },
-          { text: '名字', value: 'name', width: '300px' },
-          { text: '价格', value: 'priceInt', width: '300px' },
+          { text: '截图', value: 'image', filterable: false, width: '250px' },
+          { text: '名字', value: 'name', width: '250px' },
+          { text: '价格', value: 'priceInt', width: '200px' },
           { text: '有货', value: 'avail', width: '150px', align: ' d-none',
             filter: value => {
               if (value) {
@@ -173,7 +173,7 @@ for (var i_map = 0; i_map < json.maps.length; i_map++)
               }
             }
            },
-          { text: '位置', value: 'map', filterable: false, width: '150px' },
+          { text: '位置', value: 'map', filterable: false, width: '100px' },
           { text: '商店', value: 'shop', filterable: false },
         ],
         goods: tabledata,
